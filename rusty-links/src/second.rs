@@ -27,13 +27,12 @@ impl List {
     
     // return the element of stack top
     pub fn pop(&mut self) -> Option<i32> {
-        match self.head.take() {
-            None => None,
-            Some(node) => {
-                self.head = node.next;
-                Some(node.elem)
-            }
-        }
+        // match option {None => None, Some(x) => Some(y)} is what map() doing here
+        // just no need to write None => None again
+        self.head.take().map(|node| {
+            self.head = node.next;
+            node.elem
+        })
     }
 }
 
