@@ -42,6 +42,7 @@ struct Node {
     next: Link,   // next is either a pointer of Empty(rust has no null pointer)
 }
 
+// this is actually reinventing a bad version of Option
 enum Link {
     Empty,
     More(Box<Node>),    // we are not allowed to publicly talk about private types
