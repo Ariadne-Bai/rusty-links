@@ -4,6 +4,8 @@ pub struct List<T> {
     head: Link<T>,
 }
 
+
+
 type Link<T> = Option<Box<Node<T>>>;
 
 struct Node<T> {
@@ -82,4 +84,31 @@ fn peek() {
     });
     assert_eq!(list.peek(), Some(&42));
     assert_eq!(list.pop(), Some(42));
+}
+
+// for iterator
+/**
+ * pub trait Iterator {
+ *     type Item;
+ *     fn next(&mut self) -> Option<Self::Item>
+ * }
+ * this is declaring that every implementation of Iterator has an associated
+ * type called 'item'; this is the type that is can spit out when you call next
+ */
+
+// Tuple structs, useful for trivial wrappers around other types
+pub struct IntoIter<T>(List<T>);
+
+impl<T> List<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIter(self)
+    }
+}
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        // .0 means accessing fields of a tuple struct numerically
+        self.0.pop()
+    }
 }
