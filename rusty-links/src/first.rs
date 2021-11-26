@@ -34,12 +34,17 @@ impl List {
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        match self.head {
+        let result;
+        // mem::replace return the old value of dest
+        match mem::replace(&mut self.head, Link::Empty) {
             Link::Empty => {
+                result = None;
             }
             Link::More(node) => {
+                result = Some(node.elem);
+                self.head = node.next;
             }
-        }
-        unimplemented!()
+        };
+        result
     }
 }
