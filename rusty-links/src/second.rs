@@ -34,6 +34,20 @@ impl<T> List<T> {
             node.elem
         })
     }
+    
+    // return a reference to the top element, or just return None if empty
+    // so return type if Option<&T>
+    // note that we are not taking the thing out from the option
+    // and we are not moving option out of the thing it is in
+    // we only need a reference to the thing inside the Option
+    // impl<T> Option<T> {
+    //     fn as_ref(&self) -> Option<&T>;
+    // }
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| {
+            &node.elem
+        })
+    } 
 }
 
 impl<T> Drop for List<T> {
