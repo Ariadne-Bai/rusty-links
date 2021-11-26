@@ -6,6 +6,13 @@
 // }
 use std::mem;
 
+mod test {
+    #[test]
+    fn basics() {
+        
+    }
+}
+
 pub struct List {
     head: Link,
 }
